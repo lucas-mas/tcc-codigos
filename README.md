@@ -1,13 +1,15 @@
 # tcc-scripts
-Scripts usados no TCC para análise do tempo de convergência do HTE, SMA e EWMA.
+Scripts used to analyze HTE, HTEWMA, HTESW, SMA and EWMA convergence time.
 
-Foram utilizadas as linguagens Python e Shell.
+Numerical simulators for the five methods are in the "simulators" folder.
 
-A ideia é que os scripts sejam publicados aos poucos. Acho que é melhor organizar os códigos primeiro.
+Python, Shell and C languages were used in this project.
 
-Tem vários outros scripts:
-- Calculador de acurácia
-- Calculador de variabilidade
-- Calculador de tempo de convergência
-- Geradores de gráficos de acurácia, variabilidade e tempo de convergência
-- E alguns outros
+The idea is that the scripts are released gradually. I think it's better to organize the codes first.
+
+There are several other scripts:
+- Accuracy calculator
+- Variability calculator
+- Convergence time calculator
+- Accuracy, variability and convergence time graph generators
+- And some others
