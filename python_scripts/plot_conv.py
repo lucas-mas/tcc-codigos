@@ -11,7 +11,7 @@ import sys
 # pf = 'pf'
 methods_legend_color='method'
 
-y_axis_label = 'Average convergency time (probes)'
+y_axis_label = 'Average convergence time (probes)'
 pi_label = "ip"
 pf_label = "fp"
 methods_legend_color='Method'
@@ -65,7 +65,7 @@ color=alt.Color('method:N',), #scale=alt.Scale(scheme='set1'),
 
 chart = alt.Chart(source).mark_line(point=True, strokeWidth=1.2).encode(
     x=alt.X('pf:O', axis=alt.Axis(title=pf_label,labelAngle=0, tickMinStep=0.3), sort=None),
-    y=alt.Y('Average convergency time (probes):Q', axis=alt.Axis(labelFontSize=14), scale=alt.Scale(domain=[0, maior_valor],),title=y_axis_label), #0.1 = 500, 0.1 janela pequena = 260, 0.6 = 190
+    y=alt.Y('Average convergence time (probes):Q', axis=alt.Axis(labelFontSize=14), scale=alt.Scale(domain=[0, maior_valor],),title=y_axis_label), #0.1 = 500, 0.1 janela pequena = 260, 0.6 = 190
     color=alt.Color('method:N',
     legend=alt.Legend(
         orient='right',
@@ -84,7 +84,7 @@ chart = alt.Chart(source).mark_line(point=True, strokeWidth=1.2).encode(
     opacity=alt.value(0.9),
     shape=alt.Shape('method:N', legend=None),
     # facet=alt.Facet('pi:N', columns=3),
-    tooltip=['Average convergency time (probes):Q'],    
+    tooltip=['Average convergence time (probes):Q'],    
 )
 #\
 # .configure_point(
