@@ -1,4 +1,5 @@
 traces/
-.png
-.csv
-.html
+*.png
+*.csv
+*.html
+python_scripts/__pycache__/

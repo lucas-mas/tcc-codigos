@@ -4,7 +4,7 @@ from generate_trace import *
 
 number_of_probes=200000
 
-#The average convergency time will be calculated based on this total traces.
+#The average convergence time will be calculated based on this total traces.
 #Here the amount of traces considered in the average calculation can be modified.
 number_of_traces = 10
 

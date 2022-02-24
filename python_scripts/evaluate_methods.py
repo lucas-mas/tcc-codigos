@@ -18,13 +18,13 @@ if sys.argv[1] == 'conv':
             traces.append(trace1)
 
 
-    if not os.path.isfile('convergency.csv'):
-        with open('convergency.csv', 'w') as file:
-            line = 'method,Average convergency time (probes),Minimum,Maximum,ip,fp\n'
+    if not os.path.isfile('convergence.csv'):
+        with open('convergence.csv', 'w') as file:
+            line = 'method,Average convergence time (probes),Minimum,Maximum,ip,fp\n'
             file.write(line)
     for trace in traces:
         for method in methods_to_evaluate:
-            script = 'python convergency_time.py'+' '+method+' '+' '.join(trace)
+            script = 'python convergence_time.py'+' '+method+' '+' '.join(trace)
             subprocess.call(script, shell=True)
 
 
