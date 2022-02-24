@@ -1,30 +1,27 @@
-
-
 import altair as alt
 import pandas as pd
 from altair_saver import save
-import os
 import sys
 
 
-#primeiro argumento é o arquivo com os dados
-dados = sys.argv[1]
+#primeiro argumento é o file com os data
+data = sys.argv[1]
 
 if 'delta.csv' in sys.argv[1]:
-    # eixo_y_label = 'Variabilidade'
-    eixo_y_label = 'Variability'
-    eixo_y_mean = 'mean(Variabilidade(Delta)):Q'
-    eixo_y = 'Variabilidade(Delta):Q'
+    # y_axis_label = 'Variability'
+    y_axis_label = 'Variability'
+    y_axis_mean = 'mean(Variability(Delta)):Q'
+    y_axis = 'Variability(Delta):Q'
 
 elif 'lambda.csv' in sys.argv[1]:
-    eixo_y_label = 'Accuracy'
-    # eixo_y_label = 'Acurácia'
-    eixo_y_mean = 'mean(Acuracia(Lambda)):Q'
-    eixo_y = 'Acuracia(Lambda):Q'
+    y_axis_label = 'Accuracy'
+    # y_axis_label = 'Acurácia'
+    y_axis_mean = 'mean(Accuracy(Lambda)):Q'
+    y_axis = 'Accuracy(Lambda):Q'
 
 
 
-source = pd.read_csv(dados, sep=',')
+source = pd.read_csv(data, sep=',')
 
 
 source = source.replace({r'hteho ([0-9]+) (0.[0-9]+)': r'HTESW; w=\1; α=\2'}, regex=True)
@@ -39,16 +36,16 @@ source = source.replace({r'sma ([0-9]+)': r'SMA; w=\1'}, regex=True)
 
 
 point = alt.Chart(source).mark_point(size=5).encode(
-    x=alt.X('Valor de p:O', axis=alt.Axis(labelAngle=0), sort=None),
-    y=alt.Y(eixo_y_mean),
-    # tooltip=[eixo_y],
-    color=alt.Color("Metodos:N")
+    x=alt.X('p value:O', axis=alt.Axis(labelAngle=0), sort=None),
+    y=alt.Y(y_axis_mean),
+    # tooltip=[y_axis],
+    color=alt.Color("methods:N")
 )
 
 line = alt.Chart(source).mark_line(strokeWidth=1).encode(
-    x=alt.X('Valor de p:O', axis=alt.Axis(labelAngle=0, title='p'), sort=None),
-    y=alt.Y(eixo_y_mean, axis=alt.Axis(title=eixo_y_label)),
-    color=alt.Color("Metodos:N", #scale=alt.Scale(scheme='set1'), 
+    x=alt.X('p value:O', axis=alt.Axis(labelAngle=0, title='p'), sort=None),
+    y=alt.Y(y_axis_mean, axis=alt.Axis(title=y_axis_label)),
+    color=alt.Color("methods:N", #scale=alt.Scale(scheme='set1'), 
     legend=\
         alt.Legend(
         columns=1,
@@ -62,10 +59,10 @@ line = alt.Chart(source).mark_line(strokeWidth=1).encode(
 
 
 band = alt.Chart(source).mark_errorbar(extent='ci').encode(
-    x=alt.X('Valor de p:O', axis=alt.Axis(labelAngle=0, title='p'), sort=None),
-    y=alt.Y(eixo_y, axis=alt.Axis(title=eixo_y_label)),
-    color=alt.Color("Metodos:N",)
-    # y=alt.Y('mean_delta:Q', axis=alt.Axis(title='Variabilidade')),
+    x=alt.X('p value:O', axis=alt.Axis(labelAngle=0, title='p'), sort=None),
+    y=alt.Y(y_axis, axis=alt.Axis(title=y_axis_label)),
+    color=alt.Color("methods:N",)
+    # y=alt.Y('mean_delta:Q', axis=alt.Axis(title='Variability')),
 )
 
 
