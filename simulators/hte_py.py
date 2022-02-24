@@ -1,4 +1,4 @@
-#versao em python do hte. precisa ser otimizada (ex.: usar np.array em vez de lista built-in do python)
+#versao em python do hte. precisa ser otimizada (ex.: usar np.array em vez de list built-in do python)
 
 import math
 import sys

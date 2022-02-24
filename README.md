@@ -9,8 +9,8 @@ Numerical simulators for the five methods.
 
 Scripts developed to analyze the performance of these methods.
 
-- Accuracy calculator
-- Variability calculator
-- Convergence time calculator
+- Accuracy calculatetor
+- Variability calculatetor
+- Convergence time calculatetor
 - Accuracy, variability and convergence time graph generators
 - And some others

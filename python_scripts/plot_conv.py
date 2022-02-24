@@ -1,39 +1,31 @@
-
-
-# eixo_y_label = 'Tempo de convergência médio (em probes)'
-# pi = 'pi'
-# pf = 'pf'
-metodo_legenda_cor='Metodo'
-
-eixo_y_label = 'Average convergency time (in probes)'
-pi_label = "ip"
-pf_label = "fp"
-metodo_legenda_cor='Method'
-
 from typing import final
 import altair as alt
 from altair.vegalite.v4.schema.channels import Opacity
 from altair.vegalite.v4.schema.core import ColorScheme, TickConfig
 import pandas as pd
 from altair_saver import save
-
-
-import ast
-
-import os
 import sys
-import json
+
+# y_axis_label = 'Tempo de convergência médio (em probes)'
+# pi = 'pi'
+# pf = 'pf'
+methods_legend_color='method'
+
+y_axis_label = 'Average convergency time (probes)'
+pi_label = "ip"
+pf_label = "fp"
+methods_legend_color='Method'
 
 
-dados = sys.argv[1]
+data = sys.argv[1]
 
-source = pd.read_csv(dados, sep=',')
-
-
-maior_valor = max(source['Maximo'])
+source = pd.read_csv(data, sep=',')
 
 
-#aqui só ajeita os nomes dos métodos para que os parâmetros deles apareçam nas legendas
+maior_valor = max(source['Maximum'])
+
+
+#aqui só ajeita os names dos métodos para que os parâmetros deles apareçam nas legendas
 source = source.replace({r'hteho ([0-9]+) (0.[0-9]+)': r'HTESW; w=\1; α=\2'}, regex=True)
 source = source.replace({r'htewma (0.[0-9]+) (0.[0-9]+)': r'HTEWMA; β=\1; α=\2'}, regex=True)
 source = source.replace({r'hte ([0-9]+) (0.[0-9]+)': r'HTE; w=\1; α=\2\n'}, regex=True)
@@ -51,30 +43,30 @@ print(source)
 
 error_bars = alt.Chart(source).mark_errorbar().encode(
         x=alt.X('pf:N'),
-        y=alt.Y('Minimo:Q', title=''),
-        y2='Maximo:Q',
-        color=alt.Color('Metodo:N', title=metodo_legenda_cor), #scale=alt.Scale(scheme='set1'),
+        y=alt.Y('Minimum:Q', title=''),
+        y2='Maximum:Q',
+        color=alt.Color('method:N', title=methods_legend_color), #scale=alt.Scale(scheme='set1'),
 
     )
 
 tick_baixo = alt.Chart(source).mark_tick(size=5).encode(
 x=alt.X('pf:N', axis=alt.Axis(labelAngle=0), sort=None),
-y=alt.Y('Minimo', title=''),
-color=alt.Color('Metodo:N',), #scale=alt.Scale(scheme='set1'),
+y=alt.Y('Minimum', title=''),
+color=alt.Color('method:N',), #scale=alt.Scale(scheme='set1'),
 
 )
 
 tick_alto = alt.Chart(source).mark_tick(size=5).encode(
 x=alt.X('pf:N', axis=alt.Axis(labelAngle=0), sort=None),
-y=alt.Y('Maximo',),
-color=alt.Color('Metodo:N',), #scale=alt.Scale(scheme='set1'),
+y=alt.Y('Maximum',),
+color=alt.Color('method:N',), #scale=alt.Scale(scheme='set1'),
 
 )
 
 chart = alt.Chart(source).mark_line(point=True, strokeWidth=1.2).encode(
     x=alt.X('pf:O', axis=alt.Axis(title=pf_label,labelAngle=0, tickMinStep=0.3), sort=None),
-    y=alt.Y('Tempo de convergencia medio(em probes):Q', axis=alt.Axis(labelFontSize=14), scale=alt.Scale(domain=[0, maior_valor],),title=eixo_y_label), #0.1 = 500, 0.1 janela pequena = 260, 0.6 = 190
-    color=alt.Color('Metodo:N',
+    y=alt.Y('Average convergency time (probes):Q', axis=alt.Axis(labelFontSize=14), scale=alt.Scale(domain=[0, maior_valor],),title=y_axis_label), #0.1 = 500, 0.1 janela pequena = 260, 0.6 = 190
+    color=alt.Color('method:N',
     legend=alt.Legend(
         orient='right',
         # orient='bottom',
@@ -90,9 +82,9 @@ chart = alt.Chart(source).mark_line(point=True, strokeWidth=1.2).encode(
         ),
     
     opacity=alt.value(0.9),
-    shape=alt.Shape('Metodo:N', legend=None),
+    shape=alt.Shape('method:N', legend=None),
     # facet=alt.Facet('pi:N', columns=3),
-    tooltip=['Tempo de convergencia medio(em probes):Q'],    
+    tooltip=['Average convergency time (probes):Q'],    
 )
 #\
 # .configure_point(
