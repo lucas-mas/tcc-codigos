@@ -6,16 +6,17 @@ from generate_trace import *
 
 args_lambda = method_name+' '+' '.join(parameters) +' '+' '.join(trace_infos)
 
-scrinitial_probabilityt = "python calculate_accuracy_for_convergence.py "+args_lambda
+initial_probability = "python calculate_accuracy_for_convergence.py "+args_lambda
 
 
-average_lambda = subprocess.check_output(scrinitial_probabilityt, shell=True)
+average_lambda = subprocess.check_output(initial_probability, shell=True)
 
 average_lambda = float(average_lambda.decode())
 
 #The average accuracy time will be calculated based on this total traces.
 #Here the quantity of generated traces can be modified.
-number_of_traces = 10
+#For example, you can run with fewer traces for faster execution for testing purposes
+number_of_traces = 300
 
 trace_parameters=' '.join(trace_infos)
 traces_folder=generate_all_traces(trace_parameters, number_of_traces)
