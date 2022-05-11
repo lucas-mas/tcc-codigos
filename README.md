@@ -33,9 +33,13 @@ python evaluate_methods.py lambda
 To define which methods should be evaluated, the value of the methods_to_evaluate variable must be edited. This variable is a list of strings, and each string is a method with its parameters. For example, if you want to analyze HTE with alpha 0.1 and window w = 20, you would add the string "hte 20 0.1" to the list. The format that should be used in the string passed as a parameter to each method is shown below, where w is a window size, α is an alpha value, and β is a beta value.
 
 hte w α
+
 sma w
+
 ewma β
+
 htewma β α
+
 htesw w α
 
 
